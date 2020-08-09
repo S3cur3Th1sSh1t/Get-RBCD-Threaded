@@ -46,9 +46,9 @@ namespace Get_RBCD
         }
     }
 
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var stopWatch = Stopwatch.StartNew();
 
@@ -85,7 +85,7 @@ namespace Get_RBCD
                 if (help)
                 {
                     options.WriteOptionDescriptions(Console.Out);
-                    System.Environment.Exit(1);
+                    //System.Environment.Exit(1);
                 }
 
                 //Get the domain to use for authentication / enumeration
@@ -104,7 +104,7 @@ namespace Get_RBCD
                     catch
                     {
                         Console.WriteLine("Unable to get domain from current user context. Please specify domain to user");
-                        System.Environment.Exit(1);
+                        //System.Environment.Exit(1);
                     }
                 }
                 // Set the search base after the domain is confirmed
@@ -340,7 +340,7 @@ namespace Get_RBCD
                     else
                     {
                         Console.WriteLine(string.Format("User credentials for {0} are invalid", username));
-                        System.Environment.Exit(1);
+                        //System.Environment.Exit(1);
                     }
                 }
                 catch (Exception e)
@@ -404,7 +404,7 @@ namespace Get_RBCD
                 {
                     groupResult = groupResults[counter];
                     // Filter out groups that have privileges over objects like Domain Admins
-                    if (!(groupResult.Properties["samaccountname"][0].ToString().Equals("Domain Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Account Operators") || groupResult.Properties["samaccountname"][0].ToString().Equals("Enterprise Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Administrators") || groupResult.Properties["samaccountname"][0].ToString().Equals("DnsAdmins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Schema Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Key Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Enterprise Key Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Storage Replica Administrators")))
+                    if (!(groupResult.Properties["samaccountname"][0].ToString().Equals("Domain Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Account Operators") || groupResult.Properties["samaccountname"][0].ToString().Equals("Enterprise Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Administrators") || groupResult.Properties["samaccountname"][0].ToString().Equals("DnsAdmins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Schema Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Key Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Enterprise Key Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Storage Replica Administrators") || groupResult.Properties["samaccountname"][0].ToString().Equals("Domänen-Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Konten-Operatoren") || groupResult.Properties["samaccountname"][0].ToString().Equals("Sicherungs-Operatoren") || groupResult.Properties["samaccountname"][0].ToString().Equals("DnsAdmins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Organisations-Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Schema-Admins") || groupResult.Properties["samaccountname"][0].ToString().Equals("Server-Operatoren") || groupResult.Properties["samaccountname"][0].ToString().Equals("Administratoren") || groupResult.Properties["samaccountname"][0].ToString().Equals("Replikations-Operator") || groupResult.Properties["samaccountname"][0].ToString().Equals("Schema-Admins")))
                     {
                         var groupId = (byte[])groupResult.Properties["objectsid"][0];
                         var objectID = (new SecurityIdentifier(groupId, 0)).ToString();
